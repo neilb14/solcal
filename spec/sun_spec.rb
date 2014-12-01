@@ -16,4 +16,8 @@ describe "Sun" do
 	it "should calculate the geometric mean longitude" do
 		expect(SolCal::Sun.geometric_mean_long_in_deg(0.14912514)).to be_within(0.0001).of(249.0864)
 	end
+
+	it "should calculate the geometric mean anomoly" do
+		expect(SolCal::Sun.geometric_mean_anom_in_deg(0.14912514)).to be_within(0.001).of(5725.893)
+	end
 end
