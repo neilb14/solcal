@@ -40,4 +40,8 @@ describe "Sun" do
 	it "should calculate the sun's radian vector" do
 		expect(SolCal::Sun.rad_vector(BigDecimal.new(0.016702,9), SolCal::Angle.from_deg(5725.893))).to be_within(0.001).of(0.986261)
 	end
+
+	it "should calculate sun's app longitude" do
+		expect(SolCal::Sun.app_longitude(BigDecimal.new("247.9944"), 0.14912514)).to be_within(0.1).of(247.99)
+	end
 end

@@ -39,5 +39,9 @@ module SolCal
 		def self.rad_vector(eccent_earth_orbit, true_anomoly)
 			1.000001018*(1-eccent_earth_orbit*eccent_earth_orbit)/(1+eccent_earth_orbit*Math.cos(true_anomoly.to_rad))
 		end
+
+		def self.app_longitude(true_longitude, julian_century)
+			true_longitude-0.00569-0.00478*Math.sin(Angle.from_deg(125.04-1934.136*julian_century).to_rad)
+		end
 	end
 end
