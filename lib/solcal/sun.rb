@@ -31,5 +31,9 @@ module SolCal
 		def self.true_longitude(geometric_mean_long, equation_of_center)
 			geometric_mean_long+equation_of_center
 		end
+
+		def self.true_anomoly(geometric_mean_anom, equation_of_center)
+			geometric_mean_anom.to_deg+equation_of_center
+		end
 	end
 end

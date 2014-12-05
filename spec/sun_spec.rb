@@ -32,4 +32,8 @@ describe "Sun" do
 	it "should calculate the sun's true longitude" do
 		expect(SolCal::Sun.true_longitude(249.0864,-1.092)).to be_within(0.0001).of(247.9944)
 	end
+
+	it "should calculate the sun's true anomoly" do
+		expect(SolCal::Sun.true_anomoly(SolCal::Angle.from_deg(5725.086), -1.092)).to be_within(0.001).of(BigDecimal.new(5723.994,9))
+	end
 end

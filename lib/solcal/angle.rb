@@ -1,3 +1,5 @@
+require 'bigdecimal'
+
 module  SolCal
 	class Angle
 		def initialize(rad)
@@ -5,11 +7,11 @@ module  SolCal
 		end
 
 		def self.from_deg(deg)
-			Angle.new(deg*Math::PI/180.0)
+			Angle.new(deg*BigDecimal.new(Math::PI,9).div(180,9))
 		end
 
 		def self.from_rad(rad)
-			Angle.new(rad)
+			Angle.new(BigDecimal.new(rad,9))
 		end
 
 		def to_rad
@@ -17,7 +19,7 @@ module  SolCal
 		end
 
 		def to_deg
-			@angle_in_rad*180/Math::PI
+			@angle_in_rad*BigDecimal.new(180,9)/BigDecimal.new(Math::PI,9)
 		end
 	end
 end
