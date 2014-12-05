@@ -34,6 +34,10 @@ describe "Sun" do
 	end
 
 	it "should calculate the sun's true anomoly" do
-		expect(SolCal::Sun.true_anomoly(SolCal::Angle.from_deg(5725.086), -1.092)).to be_within(0.001).of(BigDecimal.new(5723.994,9))
+		expect(SolCal::Sun.true_anomoly(SolCal::Angle.from_deg(5725.893), -1.092)).to be_within(0.001).of(BigDecimal.new(5724.801,9))
+	end
+
+	it "should calculate the sun's radian vector" do
+		expect(SolCal::Sun.rad_vector(BigDecimal.new(0.016702,9), SolCal::Angle.from_deg(5725.893))).to be_within(0.001).of(0.986261)
 	end
 end
