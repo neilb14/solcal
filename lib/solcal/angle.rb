@@ -5,7 +5,7 @@ module  SolCal
 		end
 
 		def self.from_deg(deg)
-			Angle.new(deg*180/Math::PI)
+			Angle.new(deg*Math::PI/180.0)
 		end
 
 		def self.from_rad(rad)
@@ -17,7 +17,7 @@ module  SolCal
 		end
 
 		def to_deg
-			@angle_in_rad*Math::PI/180
+			@angle_in_rad*180/Math::PI
 		end
 	end
 end
