@@ -27,5 +27,9 @@ module SolCal
 		def self.equation_of_center(julian_century, geometric_mean_anom)
 			Math.sin(geometric_mean_anom.to_rad)*(1.914602-julian_century*(0.004817+0.000014*julian_century))+Math.sin(2*geometric_mean_anom.to_rad)*(0.019993-0.000101*julian_century)+Math.sin(3*geometric_mean_anom.to_rad)*0.000289
 		end
+
+		def self.true_longitude(geometric_mean_long, equation_of_center)
+			geometric_mean_long+equation_of_center
+		end
 	end
 end

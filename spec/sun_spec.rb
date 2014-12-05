@@ -28,4 +28,8 @@ describe "Sun" do
 	it "should calculate the sun's equation of center" do
 		expect(SolCal::Sun.equation_of_center(0.149125142596397, SolCal::Angle.from_deg(5725.89261441308))).to be_within(0.00001).of(-1.09204)
 	end
+
+	it "should calculate the sun's true longitude" do
+		expect(SolCal::Sun.true_longitude(249.0864,-1.092)).to be_within(0.0001).of(247.9944)
+	end
 end
