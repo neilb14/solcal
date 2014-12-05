@@ -19,5 +19,9 @@ module SolCal
 		def self.geometric_mean_anom_in_deg(julian_century)
 			357.52911+julian_century*(35999.05029 - 0.0001537*julian_century)
 		end
+
+		def self.eccent_earth_orbit(julian_century)
+			0.016708634-julian_century*(0.000042037+0.0000001267*julian_century)
+		end
 	end
 end

@@ -20,4 +20,8 @@ describe "Sun" do
 	it "should calculate the geometric mean anomoly" do
 		expect(SolCal::Sun.geometric_mean_anom_in_deg(0.14912514)).to be_within(0.001).of(5725.893)
 	end
+
+	it "should calculate the eccent of earth's orbit" do
+		expect(SolCal::Sun.eccent_earth_orbit(0.14912514)).to be_within(0.000001).of(0.016702)
+	end
 end
