@@ -43,5 +43,9 @@ module SolCal
 		def self.app_longitude(true_longitude, julian_century)
 			true_longitude-0.00569-0.00478*Math.sin(Angle.from_deg(125.04-1934.136*julian_century).to_rad)
 		end
+
+		def self.mean_oblique_ecliptic(julian_century)
+			23+(26+(21.448-julian_century*(46.815+julian_century*(0.00059-julian_century*0.001813)))/60)/60
+		end
 	end
 end
