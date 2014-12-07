@@ -47,7 +47,7 @@ describe "Sun" do
 	end
 
 	it "should calculate sun's app longitude" do
-		expect(SolCal::Sun.app_longitude(BigDecimal.new("247.9944"), @julian_century)).to be_within(0.1).of(247.99)
+		expect(SolCal::Sun.app_longitude(BigDecimal.new("247.9944"), @julian_century)).to be_within(0.01).of(247.99)
 	end
 
 	it "should calculate the mean oblique eciptic" do
@@ -56,5 +56,9 @@ describe "Sun" do
 
 	it "should calculate the oblique correction" do
 		expect(SolCal::Sun.oblique_correction(@julian_century, 23.43735)).to be_within(0.001).of(23.4349)
+	end
+
+	it "should calculate the right ascension" do
+		expect(SolCal::Sun.right_ascension(SolCal::Angle.from_deg(247.99), SolCal::Angle.from_deg(23.4349)).to_deg).to be_within(0.001).of(-113.777)
 	end
 end

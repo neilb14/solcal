@@ -51,5 +51,9 @@ module SolCal
 		def self.oblique_correction(julian_century, mean_oblique_ecliptic)
 			mean_oblique_ecliptic+0.00256*Math.cos(Angle.from_deg(125.04-1934.136*julian_century).to_rad)
 		end
+
+		def self.right_ascension(app_longitude, oblique_correction)
+			Angle.from_rad(Math.atan2(BigDecimal(Math.cos(oblique_correction.to_rad),9)*BigDecimal(Math.sin(app_longitude.to_rad),9),Math.cos(app_longitude.to_rad)))
+		end
 	end
 end
