@@ -59,5 +59,9 @@ module SolCal
 		def self.declination(app_longitude, oblique_correction)
 			Angle.from_rad(Math.asin(Math.sin(oblique_correction.to_rad)*Math.sin(app_longitude.to_rad)))
 		end
+
+		def self.var_y(oblique_correction)
+			Math.tan(oblique_correction.div(2).to_rad)**2
+		end
 	end
 end

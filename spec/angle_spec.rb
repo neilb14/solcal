@@ -18,4 +18,8 @@ describe "Angle" do
 	it "should normalize large angles" do
 		expect(SolCal::Angle.from_deg(5725.893).to_rad).to be_within(0.1).of(99.9)
 	end
+
+	it "should divide" do
+		expect(SolCal::Angle.from_deg(90).div(2).to_deg).to be_within(0.1).of(45)
+	end
 end

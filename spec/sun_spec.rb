@@ -65,4 +65,8 @@ describe "Sun" do
 	it "should calculate the declination" do
 		expect(SolCal::Sun.declination(SolCal::Angle.from_deg(247.99), SolCal::Angle.from_deg(23.4349)).to_deg).to be_within(0.001).of(-21.6368)
 	end
+
+	it "should calculate var y" do
+		expect(SolCal::Sun.var_y(SolCal::Angle.from_deg(23.4349))).to be_within(0.0001).of(0.043018)
+	end
 end
