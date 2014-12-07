@@ -53,4 +53,8 @@ describe "Sun" do
 	it "should calculate the mean oblique eciptic" do
 		expect(SolCal::Sun.mean_oblique_ecliptic(@julian_century)).to be_within(0.001).of(23.43735)
 	end
+
+	it "should calculate the oblique correction" do
+		expect(SolCal::Sun.oblique_correction(@julian_century, 23.43735)).to be_within(0.001).of(23.4349)
+	end
 end

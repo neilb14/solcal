@@ -47,5 +47,9 @@ module SolCal
 		def self.mean_oblique_ecliptic(julian_century)
 			23+(26+(21.448-julian_century*(46.815+julian_century*(0.00059-julian_century*0.001813)))/60)/60
 		end
+
+		def self.oblique_correction(julian_century, mean_oblique_ecliptic)
+			mean_oblique_ecliptic+0.00256*Math.cos(Angle.from_deg(125.04-1934.136*julian_century).to_rad)
+		end
 	end
 end
