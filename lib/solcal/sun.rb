@@ -55,5 +55,9 @@ module SolCal
 		def self.right_ascension(app_longitude, oblique_correction)
 			Angle.from_rad(Math.atan2(BigDecimal(Math.cos(oblique_correction.to_rad),9)*BigDecimal(Math.sin(app_longitude.to_rad),9),Math.cos(app_longitude.to_rad)))
 		end
+
+		def self.declination(app_longitude, oblique_correction)
+			Angle.from_rad(Math.asin(Math.sin(oblique_correction.to_rad)*Math.sin(app_longitude.to_rad)))
+		end
 	end
 end
