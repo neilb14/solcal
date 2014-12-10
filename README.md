@@ -1,6 +1,6 @@
 # Solcal
 
-TODO: Write a gem description
+Find Sunrise, Sunset, Solar Noon and Solar Position for Any Place on Earth
 
 ## Installation
 
