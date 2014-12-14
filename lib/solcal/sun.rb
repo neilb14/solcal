@@ -83,5 +83,9 @@ module SolCal
 		def self.solar_noon(longitude, time_zone, equation_of_time)
 			(720-4*longitude.to_deg-equation_of_time+time_zone*60)/1440
 		end
+
+		def self.sunrise_at(solar_noon, ha_sunrise)
+			solar_noon-ha_sunrise.to_deg*4/1440
+		end
 	end
 end

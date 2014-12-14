@@ -84,4 +84,8 @@ describe "Sun" do
 	it "should calculate solar noon" do
 		expect(SolCal::Sun.solar_noon(@longitude,@time_zone,11.059588)).to be_within(0.0001).of(0.515931)
 	end
+
+	it "should calculate sunrise time" do
+		expect(SolCal::Sun.sunrise_at(0.515931,SolCal::Angle.from_deg(59.02064))).to be_within(0.0001).of(0.351985)
+	end
 end
