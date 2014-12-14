@@ -4,6 +4,7 @@ describe "Sun" do
 
 	before :each do
 		@julian_century = 0.149125142596397
+		@latitude = SolCal::Angle.from_deg(53.5333)
 	end
 
 	it "should calculate sunrise" do
@@ -72,5 +73,9 @@ describe "Sun" do
 
 	it "should calculate the equation of time" do
 		expect(SolCal::Sun.equation_of_time(0.043018,SolCal::Angle.from_deg(250.072),SolCal::Angle.from_deg(5726.878),0.016702)).to be_within(0.0001).of(11.0596)
+	end
+
+	it "should calculate the HA sunrise" do
+		expect(SolCal::Sun.ha_sunrise(SolCal::Angle.from_deg(-21.7958), @latitude).to_deg).to be_within(0.0001).of(59.02064)
 	end
 end

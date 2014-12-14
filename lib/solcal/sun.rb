@@ -72,5 +72,12 @@ module SolCal
 			e = -1.25*eccent_earth_orbit*eccent_earth_orbit*Math.sin(2*geometric_mean_anom.to_rad)
 			4*Angle.from_rad(a+b+c+d+e).to_deg
 		end
+
+		def self.ha_sunrise(declination,latitude)
+			a = Math.cos(Angle.from_deg(90.833).to_rad)
+			b = Math.cos(latitude.to_rad)*Math.cos(declination.to_rad)
+			c = Math.tan(latitude.to_rad)*Math.tan(declination.to_rad)
+			Angle.from_rad(Math.acos(a/b-c))
+		end
 	end
 end
