@@ -12,12 +12,12 @@ module SolCal
 			hour_angle_of_sunrise_in_deg*8
 		end
 
-		def self.geometric_mean_long_in_deg(julian_century)
-			(280.46646+julian_century*(36000.76983 + julian_century*0.0003032))%360
+		def self.geometric_mean_long(julian_century)
+			Angle.from_deg((280.46646+julian_century*(36000.76983 + julian_century*0.0003032))%360)
 		end
 
-		def self.geometric_mean_anom_in_deg(julian_century)
-			357.52911+julian_century*(35999.05029 - 0.0001537*julian_century)
+		def self.geometric_mean_anom(julian_century)
+			Angle.from_deg(357.52911+julian_century*(35999.05029 - 0.0001537*julian_century))
 		end
 
 		def self.eccent_earth_orbit(julian_century)
@@ -29,7 +29,7 @@ module SolCal
 		end
 
 		def self.true_longitude(geometric_mean_long, equation_of_center)
-			geometric_mean_long+equation_of_center
+			Angle.from_deg(geometric_mean_long.to_deg+equation_of_center)
 		end
 
 		def self.true_anomoly(geometric_mean_anom, equation_of_center)
@@ -41,7 +41,7 @@ module SolCal
 		end
 
 		def self.app_longitude(true_longitude, julian_century)
-			true_longitude-0.00569-0.00478*Math.sin(Angle.from_deg(125.04-1934.136*julian_century).to_rad)
+			Angle.from_deg(true_longitude.to_deg-0.00569-0.00478*Math.sin(Angle.from_deg(125.04-1934.136*julian_century).to_rad))
 		end
 
 		def self.mean_oblique_ecliptic(julian_century)
@@ -49,7 +49,7 @@ module SolCal
 		end
 
 		def self.oblique_correction(julian_century, mean_oblique_ecliptic)
-			mean_oblique_ecliptic+0.00256*Math.cos(Angle.from_deg(125.04-1934.136*julian_century).to_rad)
+			Angle.from_deg(mean_oblique_ecliptic+0.00256*Math.cos(Angle.from_deg(125.04-1934.136*julian_century).to_rad))
 		end
 
 		def self.right_ascension(app_longitude, oblique_correction)
@@ -94,6 +94,26 @@ module SolCal
 
 		def self.duration_of_sunlight(ha_sunrise)
 			8*ha_sunrise.to_deg
+		end
+
+		def self.daylight(latitude, longitude, time_zone, date)
+			results = {}
+			results[:julian_century] = Julian.century_from(date, time_zone)
+			results[:geometric_mean_long] = geometric_mean_long(results[:julian_century])
+			results[:geometric_mean_anom] = geometric_mean_anom(results[:julian_century])
+			results[:eccent_earth_orbit] = eccent_earth_orbit(results[:julian_century])
+			results[:oblique_correction] = oblique_correction(results[:julian_century], mean_oblique_ecliptic(results[:julian_century]))
+			results[:equation_of_center] = equation_of_center(results[:julian_century], results[:geometric_mean_anom])
+			results[:equation_of_time] = equation_of_time(var_y(results[:oblique_correction]),results[:geometric_mean_long], results[:geometric_mean_anom], results[:eccent_earth_orbit])
+			results[:solar_noon] = solar_noon(longitude, time_zone, results[:equation_of_time])
+			results[:true_longitude] = true_longitude(results[:geometric_mean_long],results[:equation_of_center])
+			results[:app_longitude] = app_longitude(results[:true_longitude],results[:julian_century])
+			results[:declination] = declination(results[:app_longitude],results[:oblique_correction])
+			results[:ha_sunrise] = ha_sunrise(results[:declination], latitude)
+			results[:sunrise_at] = sunrise_at(results[:solar_noon], results[:ha_sunrise])
+			results[:sunset_at] = sunset_at(results[:solar_noon], results[:ha_sunrise])
+			results[:duration] = duration_of_sunlight(results[:ha_sunrise])	
+			results
 		end
 	end
 end

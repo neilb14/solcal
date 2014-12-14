@@ -7,6 +7,7 @@ describe "Sun" do
 		@latitude = SolCal::Angle.from_deg(53.5333)
 		@longitude = SolCal::Angle.from_deg(-113.5)
 		@time_zone = -7
+		@date = Date.new(2014,12,1)
 	end
 
 	it "should calculate sunrise" do
@@ -22,11 +23,11 @@ describe "Sun" do
 	end
 
 	it "should calculate the geometric mean longitude" do
-		expect(SolCal::Sun.geometric_mean_long_in_deg(@julian_century)).to be_within(0.0001).of(249.0864)
+		expect(SolCal::Sun.geometric_mean_long(@julian_century).to_deg).to be_within(0.0001).of(249.0864)
 	end
 
 	it "should calculate the geometric mean anomoly" do
-		expect(SolCal::Sun.geometric_mean_anom_in_deg(@julian_century)).to be_within(0.001).of(5725.893)
+		expect(SolCal::Sun.geometric_mean_anom(@julian_century).to_deg).to be_within(0.001).of(5725.893)
 	end
 
 	it "should calculate the eccent of earth's orbit" do
@@ -38,7 +39,7 @@ describe "Sun" do
 	end
 
 	it "should calculate the sun's true longitude" do
-		expect(SolCal::Sun.true_longitude(249.0864,-1.092)).to be_within(0.0001).of(247.9944)
+		expect(SolCal::Sun.true_longitude(SolCal::Angle.from_deg(249.0864),-1.092).to_deg).to be_within(0.0001).of(247.9944)
 	end
 
 	it "should calculate the sun's true anomoly" do
@@ -50,7 +51,7 @@ describe "Sun" do
 	end
 
 	it "should calculate sun's app longitude" do
-		expect(SolCal::Sun.app_longitude(BigDecimal.new("247.9944"), @julian_century)).to be_within(0.01).of(247.99)
+		expect(SolCal::Sun.app_longitude(SolCal::Angle.from_deg(247.9944), @julian_century).to_deg).to be_within(0.01).of(247.99)
 	end
 
 	it "should calculate the mean oblique eciptic" do
@@ -58,7 +59,7 @@ describe "Sun" do
 	end
 
 	it "should calculate the oblique correction" do
-		expect(SolCal::Sun.oblique_correction(@julian_century, 23.43735)).to be_within(0.001).of(23.4349)
+		expect(SolCal::Sun.oblique_correction(@julian_century, 23.43735).to_deg).to be_within(0.001).of(23.4349)
 	end
 
 	it "should calculate the right ascension" do
@@ -83,6 +84,7 @@ describe "Sun" do
 
 	it "should calculate solar noon" do
 		expect(SolCal::Sun.solar_noon(@longitude,@time_zone,11.059588)).to be_within(0.0001).of(0.515931)
+		expect(SolCal::Sun.solar_noon(@longitude,@time_zone,BigDecimal.new("10.98306"))).to be_within(0.0001).of(0.515984)
 	end
 
 	it "should calculate sunrise time" do
@@ -95,5 +97,12 @@ describe "Sun" do
 
 	it "should calculate the sunlight duration" do
 		expect(SolCal::Sun.duration_of_sunlight(SolCal::Angle.from_deg(59.02064))).to be_within(0.001).of(472.16513)
+	end
+
+	it "should calculate the interesting daylight information" do
+		daylight = SolCal::Sun.daylight(@latitude, @longitude, @time_zone, @date)
+		expect(daylight[:sunrise_at]).to be_within(0.001).of(0.351985)
+		expect(daylight[:sunset_at]).to be_within(0.001).of(0.679877)
+		expect(daylight[:duration]).to be_within(1).of(472.16513)
 	end
 end
