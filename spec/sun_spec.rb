@@ -69,4 +69,8 @@ describe "Sun" do
 	it "should calculate var y" do
 		expect(SolCal::Sun.var_y(SolCal::Angle.from_deg(23.4349))).to be_within(0.0001).of(0.043018)
 	end
+
+	it "should calculate the equation of time" do
+		expect(SolCal::Sun.equation_of_time(0.043018,SolCal::Angle.from_deg(250.072),SolCal::Angle.from_deg(5726.878),0.016702)).to be_within(0.0001).of(11.0596)
+	end
 end
