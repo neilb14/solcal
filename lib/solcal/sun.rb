@@ -79,5 +79,9 @@ module SolCal
 			c = Math.tan(latitude.to_rad)*Math.tan(declination.to_rad)
 			Angle.from_rad(Math.acos(a/b-c))
 		end
+
+		def self.solar_noon(longitude, time_zone, equation_of_time)
+			(720-4*longitude.to_deg-equation_of_time+time_zone*60)/1440
+		end
 	end
 end
