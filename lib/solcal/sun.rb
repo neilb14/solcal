@@ -87,5 +87,9 @@ module SolCal
 		def self.sunrise_at(solar_noon, ha_sunrise)
 			solar_noon-ha_sunrise.to_deg*4/1440
 		end
+
+		def self.sunset_at(solar_noon, ha_sunrise)
+			solar_noon+ha_sunrise.to_deg*4/1440
+		end
 	end
 end
