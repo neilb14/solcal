@@ -97,8 +97,10 @@ module SolCal
 		end
 
 		def self.daylight(latitude, longitude, time_zone, date)
+			command = SolCal::Commands::JulianCenturyCommand.new({date:date,time_zone:time_zone})
+			command.execute
 			results = {}
-			results[:julian_century] = Julian.century_from(date, time_zone)
+			results[:julian_century] = command.result
 			results[:geometric_mean_long] = geometric_mean_long(results[:julian_century])
 			results[:geometric_mean_anom] = geometric_mean_anom(results[:julian_century])
 			results[:eccent_earth_orbit] = eccent_earth_orbit(results[:julian_century])
