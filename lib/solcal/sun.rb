@@ -12,10 +12,6 @@ module SolCal
 			hour_angle_of_sunrise_in_deg*8
 		end
 
-		def self.geometric_mean_long(julian_century)
-			Angle.from_deg((280.46646+julian_century*(36000.76983 + julian_century*0.0003032))%360)
-		end
-
 		def self.geometric_mean_anom(julian_century)
 			Angle.from_deg(357.52911+julian_century*(35999.05029 - 0.0001537*julian_century))
 		end
@@ -97,11 +93,15 @@ module SolCal
 		end
 
 		def self.daylight(latitude, longitude, time_zone, date)
-			command = SolCal::Commands::JulianCenturyCommand.new({date:date,time_zone:time_zone})
-			command.execute
-			results = {}
-			results[:julian_century] = command.result
-			results[:geometric_mean_long] = geometric_mean_long(results[:julian_century])
+			results = {date:date,time_zone:time_zone}
+			julian_century_command = SolCal::Commands::JulianCenturyCommand.new(results)
+			julian_century_command.execute
+			results[:julian_century] = julian_century_command.result
+
+			geometric_mean_long_command = SolCal::Commands::GeometricMeanLongCommand.new(results)
+			geometric_mean_long_command.execute
+			results[:geometric_mean_long] = geometric_mean_long_command.result
+			
 			results[:geometric_mean_anom] = geometric_mean_anom(results[:julian_century])
 			results[:eccent_earth_orbit] = eccent_earth_orbit(results[:julian_century])
 			results[:oblique_correction] = oblique_correction(results[:julian_century], mean_oblique_ecliptic(results[:julian_century]))

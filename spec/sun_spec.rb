@@ -22,10 +22,6 @@ describe "Sun" do
 		expect(SolCal::Sun.duration(59.30901)).to be_within(0.01).of(474.47)
 	end
 
-	it "should calculate the geometric mean longitude" do
-		expect(SolCal::Sun.geometric_mean_long(@julian_century).to_deg).to be_within(0.0001).of(249.0864)
-	end
-
 	it "should calculate the geometric mean anomoly" do
 		expect(SolCal::Sun.geometric_mean_anom(@julian_century).to_deg).to be_within(0.001).of(5725.893)
 	end
