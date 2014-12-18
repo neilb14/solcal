@@ -94,14 +94,8 @@ module SolCal
 
 		def self.daylight(latitude, longitude, time_zone, date)
 			results = {date:date,time_zone:time_zone}
-			julian_century_command = SolCal::Commands::JulianCenturyCommand.new(results)
-			julian_century_command.execute
-			results[:julian_century] = julian_century_command.result
-
-			geometric_mean_long_command = SolCal::Commands::GeometricMeanLongCommand.new(results)
-			geometric_mean_long_command.execute
-			results[:geometric_mean_long] = geometric_mean_long_command.result
-			
+			SolCal::Commands::JulianCenturyCommand.new(results).execute
+			SolCal::Commands::GeometricMeanLongCommand.new(results).execute
 			results[:geometric_mean_anom] = geometric_mean_anom(results[:julian_century])
 			results[:eccent_earth_orbit] = eccent_earth_orbit(results[:julian_century])
 			results[:oblique_correction] = oblique_correction(results[:julian_century], mean_oblique_ecliptic(results[:julian_century]))
