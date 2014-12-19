@@ -58,10 +58,6 @@ describe "Sun" do
 		expect(SolCal::Sun.equation_of_time(0.043018,SolCal::Angle.from_deg(250.072),SolCal::Angle.from_deg(5726.878),0.016702)).to be_within(0.0001).of(11.0596)
 	end
 
-	it "should calculate the HA sunrise" do
-		expect(SolCal::Sun.ha_sunrise(SolCal::Angle.from_deg(-21.7958), @latitude).to_deg).to be_within(0.0001).of(59.02064)
-	end
-
 	it "should calculate solar noon" do
 		expect(SolCal::Sun.solar_noon(@longitude,@time_zone,11.059588)).to be_within(0.0001).of(0.515931)
 		expect(SolCal::Sun.solar_noon(@longitude,@time_zone,BigDecimal.new("10.98306"))).to be_within(0.0001).of(0.515984)

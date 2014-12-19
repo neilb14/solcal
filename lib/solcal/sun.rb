@@ -53,19 +53,12 @@ module SolCal
 			4*Angle.from_rad(a+b+c+d+e).to_deg
 		end
 
-		def self.ha_sunrise(declination,latitude)
-			a = Math.cos(Angle.from_deg(90.833).to_rad)
-			b = Math.cos(latitude.to_rad)*Math.cos(declination.to_rad)
-			c = Math.tan(latitude.to_rad)*Math.tan(declination.to_rad)
-			Angle.from_rad(Math.acos(a/b-c))
-		end
-
 		def self.solar_noon(longitude, time_zone, equation_of_time)
 			(720-4*longitude.to_deg-equation_of_time+time_zone*60)/1440
 		end
 
 		def self.daylight(latitude, longitude, time_zone, date)
-			results = {date:date,time_zone:time_zone}
+			results = {date:date,time_zone:time_zone,latitude:latitude}
 			SolCal::Commands::GeometricMeanLongCommand.new(results).execute
 			SolCal::Commands::GeometricMeanAnomCommand.new(results).execute
 			results[:eccent_earth_orbit] = eccent_earth_orbit(results[:julian_century])
@@ -76,7 +69,6 @@ module SolCal
 			results[:true_longitude] = true_longitude(results[:geometric_mean_long],results[:equation_of_center])
 			results[:app_longitude] = app_longitude(results[:true_longitude],results[:julian_century])
 			results[:declination] = declination(results[:app_longitude],results[:oblique_correction])
-			results[:ha_sunrise] = ha_sunrise(results[:declination], latitude)
 			SolCal::Commands::SunsetCommand.new(results).execute
 			SolCal::Commands::SunriseCommand.new(results).execute
 			SolCal::Commands::DurationCommand.new(results).execute
