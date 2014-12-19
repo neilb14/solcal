@@ -36,10 +36,6 @@ module SolCal
 			Angle.from_rad(Math.atan2(BigDecimal(Math.cos(oblique_correction.to_rad),9)*BigDecimal(Math.sin(app_longitude.to_rad),9),Math.cos(app_longitude.to_rad)))
 		end
 
-		def self.declination(app_longitude, oblique_correction)
-			Angle.from_rad(Math.asin(Math.sin(oblique_correction.to_rad)*Math.sin(app_longitude.to_rad)))
-		end
-
 		def self.var_y(oblique_correction)
 			Math.tan(oblique_correction.div(2).to_rad)**2
 		end
@@ -68,7 +64,6 @@ module SolCal
 			results[:solar_noon] = solar_noon(longitude, time_zone, results[:equation_of_time])
 			results[:true_longitude] = true_longitude(results[:geometric_mean_long],results[:equation_of_center])
 			results[:app_longitude] = app_longitude(results[:true_longitude],results[:julian_century])
-			results[:declination] = declination(results[:app_longitude],results[:oblique_correction])
 			SolCal::Commands::SunsetCommand.new(results).execute
 			SolCal::Commands::SunriseCommand.new(results).execute
 			SolCal::Commands::DurationCommand.new(results).execute
