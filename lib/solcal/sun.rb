@@ -1,17 +1,5 @@
 module SolCal
 	module Sun
-		def self.rise(solar_noon, hour_angle_of_sunrise_in_deg)
-			solar_noon-hour_angle_of_sunrise_in_deg*4/1440
-		end
-
-		def self.set(solar_noon, hour_angle_of_sunrise_in_deg)
-			solar_noon+hour_angle_of_sunrise_in_deg*4/1440
-		end
-
-		def self.duration(hour_angle_of_sunrise_in_deg)
-			hour_angle_of_sunrise_in_deg*8
-		end
-
 		def self.eccent_earth_orbit(julian_century)
 			0.016708634-julian_century*(0.000042037+0.0000001267*julian_century)
 		end
