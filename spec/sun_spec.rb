@@ -11,8 +11,8 @@ describe "Sun" do
 
 	it "should calculate the interesting daylight information" do
 		daylight = SolCal::Sun.daylight(@latitude, @longitude, @time_zone, @date)
-		expect(daylight[:sunrise]).to be_within(0.001).of(0.351985)
-		expect(daylight[:sunset]).to be_within(0.001).of(0.679877)
+		expect(daylight[:sunrise].to_s).to eql("08:27")
+		expect(daylight[:sunset].to_s).to eql("16:18")
 		expect(daylight[:duration]).to be_within(1).of(472.16513)
 	end
 end

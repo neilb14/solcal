@@ -8,6 +8,6 @@ describe "SunriseCommand" do
 
 	it "should execute" do
 		@command.execute
-		expect(@result[:sunrise]).to be_within(0.0001).of(0.351985)
+		expect(@result[:sunrise].to_s).to eql("08:26")
 	end
 end
