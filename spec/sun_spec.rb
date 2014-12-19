@@ -38,10 +38,6 @@ describe "Sun" do
 		expect(SolCal::Sun.right_ascension(SolCal::Angle.from_deg(247.99), SolCal::Angle.from_deg(23.4349)).to_deg).to be_within(0.001).of(-113.777)
 	end
 
-	it "should calculate the equation of time" do
-		expect(SolCal::Sun.equation_of_time(0.043018,SolCal::Angle.from_deg(250.072),SolCal::Angle.from_deg(5726.878),0.016702)).to be_within(0.0001).of(11.0596)
-	end
-
 	it "should calculate the interesting daylight information" do
 		daylight = SolCal::Sun.daylight(@latitude, @longitude, @time_zone, @date)
 		expect(daylight[:sunrise]).to be_within(0.001).of(0.351985)
