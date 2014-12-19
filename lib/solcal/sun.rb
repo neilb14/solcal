@@ -8,10 +8,6 @@ module SolCal
 			Math.sin(geometric_mean_anom.to_rad)*(1.914602-julian_century*(0.004817+0.000014*julian_century))+Math.sin(2*geometric_mean_anom.to_rad)*(0.019993-0.000101*julian_century)+Math.sin(3*geometric_mean_anom.to_rad)*0.000289
 		end
 
-		def self.true_longitude(geometric_mean_long, equation_of_center)
-			Angle.from_deg(geometric_mean_long.to_deg+equation_of_center)
-		end
-
 		def self.true_anomoly(geometric_mean_anom, equation_of_center)
 			geometric_mean_anom.to_deg+equation_of_center
 		end
@@ -45,20 +41,14 @@ module SolCal
 			4*Angle.from_rad(a+b+c+d+e).to_deg
 		end
 
-		def self.solar_noon(longitude, time_zone, equation_of_time)
-			(720-4*longitude.to_deg-equation_of_time+time_zone*60)/1440
-		end
-
 		def self.daylight(latitude, longitude, time_zone, date)
-			results = {date:date,time_zone:time_zone,latitude:latitude}
+			results = {date:date,time_zone:time_zone,latitude:latitude,longitude:longitude}
 			SolCal::Commands::GeometricMeanLongCommand.new(results).execute
 			SolCal::Commands::GeometricMeanAnomCommand.new(results).execute
 			results[:eccent_earth_orbit] = eccent_earth_orbit(results[:julian_century])
 			results[:oblique_correction] = oblique_correction(results[:julian_century], mean_oblique_ecliptic(results[:julian_century]))
 			results[:equation_of_center] = equation_of_center(results[:julian_century], results[:geometric_mean_anom])
 			results[:equation_of_time] = equation_of_time(var_y(results[:oblique_correction]),results[:geometric_mean_long], results[:geometric_mean_anom], results[:eccent_earth_orbit])
-			results[:solar_noon] = solar_noon(longitude, time_zone, results[:equation_of_time])
-			results[:true_longitude] = true_longitude(results[:geometric_mean_long],results[:equation_of_center])
 			SolCal::Commands::SunsetCommand.new(results).execute
 			SolCal::Commands::SunriseCommand.new(results).execute
 			SolCal::Commands::DurationCommand.new(results).execute

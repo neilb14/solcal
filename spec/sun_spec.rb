@@ -18,10 +18,6 @@ describe "Sun" do
 		expect(SolCal::Sun.equation_of_center(@julian_century, SolCal::Angle.from_deg(5725.89261441308))).to be_within(0.00001).of(-1.09204)
 	end
 
-	it "should calculate the sun's true longitude" do
-		expect(SolCal::Sun.true_longitude(SolCal::Angle.from_deg(249.0864),-1.092).to_deg).to be_within(0.0001).of(247.9944)
-	end
-
 	it "should calculate the sun's true anomoly" do
 		expect(SolCal::Sun.true_anomoly(SolCal::Angle.from_deg(5725.893), -1.092)).to be_within(0.001).of(BigDecimal.new(5724.801,9))
 	end
@@ -49,12 +45,6 @@ describe "Sun" do
 	it "should calculate the equation of time" do
 		expect(SolCal::Sun.equation_of_time(0.043018,SolCal::Angle.from_deg(250.072),SolCal::Angle.from_deg(5726.878),0.016702)).to be_within(0.0001).of(11.0596)
 	end
-
-	it "should calculate solar noon" do
-		expect(SolCal::Sun.solar_noon(@longitude,@time_zone,11.059588)).to be_within(0.0001).of(0.515931)
-		expect(SolCal::Sun.solar_noon(@longitude,@time_zone,BigDecimal.new("10.98306"))).to be_within(0.0001).of(0.515984)
-	end
-
 
 	it "should calculate the interesting daylight information" do
 		daylight = SolCal::Sun.daylight(@latitude, @longitude, @time_zone, @date)
