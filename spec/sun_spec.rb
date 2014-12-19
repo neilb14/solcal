@@ -10,10 +10,6 @@ describe "Sun" do
 		@date = Date.new(2014,12,1)
 	end
 
-	it "should calculate the eccent of earth's orbit" do
-		expect(SolCal::Sun.eccent_earth_orbit(@julian_century)).to be_within(0.000001).of(0.016702)
-	end
-
 	it "should calculate the sun's true anomoly" do
 		expect(SolCal::Sun.true_anomoly(SolCal::Angle.from_deg(5725.893), -1.092)).to be_within(0.001).of(BigDecimal.new(5724.801,9))
 	end

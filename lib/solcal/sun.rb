@@ -1,9 +1,5 @@
 module SolCal
 	module Sun
-		def self.eccent_earth_orbit(julian_century)
-			0.016708634-julian_century*(0.000042037+0.0000001267*julian_century)
-		end
-
 		def self.true_anomoly(geometric_mean_anom, equation_of_center)
 			geometric_mean_anom.to_deg+equation_of_center
 		end
@@ -14,9 +10,6 @@ module SolCal
 
 		def self.daylight(latitude, longitude, time_zone, date)
 			results = {date:date,time_zone:time_zone,latitude:latitude,longitude:longitude}
-			SolCal::Commands::GeometricMeanLongCommand.new(results).execute
-			SolCal::Commands::GeometricMeanAnomCommand.new(results).execute
-			results[:eccent_earth_orbit] = eccent_earth_orbit(results[:julian_century])
 			SolCal::Commands::SunsetCommand.new(results).execute
 			SolCal::Commands::SunriseCommand.new(results).execute
 			SolCal::Commands::DurationCommand.new(results).execute

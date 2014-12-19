@@ -5,6 +5,7 @@ module SolCal
 		autoload :JulianCenturyCommand, 		'solcal/commands/julian_century_command'
 		autoload :GeometricMeanLongCommand,		'solcal/commands/geometric_mean_long_command'
 		autoload :GeometricMeanAnomCommand,		'solcal/commands/geometric_mean_anom_command'
+		autoload :EccentEarthOrbitCommand,		'solcal/commands/eccent_earth_orbit_command'
 		autoload :MeanObliqueEclipticCommand,	'solcal/commands/mean_oblique_ecliptic_command'
 		autoload :ObliqueCorrectionCommand,		'solcal/commands/oblique_correction_command'
 		autoload :RightAscensionCommand,		'solcal/commands/right_ascension_command'
