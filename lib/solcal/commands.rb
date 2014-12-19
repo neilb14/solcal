@@ -5,6 +5,7 @@ module SolCal
 		autoload :JulianCenturyCommand, 		'solcal/commands/julian_century_command'
 		autoload :GeometricMeanLongCommand,		'solcal/commands/geometric_mean_long_command'
 		autoload :GeometricMeanAnomCommand,		'solcal/commands/geometric_mean_anom_command'
+		autoload :TrueLongitudeCommand,			'solcal/commands/true_longitude_command'
 		autoload :AppLongitudeCommand,			'solcal/commands/app_longitude_command'
 		autoload :DeclinationCommand,			'solcal/commands/declination_command'
 		autoload :HaSunriseCommand,				'solcal/commands/ha_sunrise_command'
