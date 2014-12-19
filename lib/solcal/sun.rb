@@ -28,10 +28,6 @@ module SolCal
 			Angle.from_rad(Math.atan2(BigDecimal(Math.cos(oblique_correction.to_rad),9)*BigDecimal(Math.sin(app_longitude.to_rad),9),Math.cos(app_longitude.to_rad)))
 		end
 
-		def self.var_y(oblique_correction)
-			Math.tan(oblique_correction.div(2).to_rad)**2
-		end
-
 		def self.equation_of_time(var_y, geometric_mean_long, geometric_mean_anom, eccent_earth_orbit)
 			a = var_y*Math.sin(2*geometric_mean_long.to_rad)
 			b = -2*eccent_earth_orbit*Math.sin(geometric_mean_anom.to_rad)
@@ -48,7 +44,8 @@ module SolCal
 			results[:eccent_earth_orbit] = eccent_earth_orbit(results[:julian_century])
 			results[:oblique_correction] = oblique_correction(results[:julian_century], mean_oblique_ecliptic(results[:julian_century]))
 			results[:equation_of_center] = equation_of_center(results[:julian_century], results[:geometric_mean_anom])
-			results[:equation_of_time] = equation_of_time(var_y(results[:oblique_correction]),results[:geometric_mean_long], results[:geometric_mean_anom], results[:eccent_earth_orbit])
+			SolCal::Commands::VarYCommand.new(results).execute
+			results[:equation_of_time] = equation_of_time(results[:var_y],results[:geometric_mean_long], results[:geometric_mean_anom], results[:eccent_earth_orbit])
 			SolCal::Commands::SunsetCommand.new(results).execute
 			SolCal::Commands::SunriseCommand.new(results).execute
 			SolCal::Commands::DurationCommand.new(results).execute
