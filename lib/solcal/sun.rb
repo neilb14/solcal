@@ -72,10 +72,6 @@ module SolCal
 			solar_noon+ha_sunrise.to_deg*4/1440
 		end
 
-		def self.duration_of_sunlight(ha_sunrise)
-			8*ha_sunrise.to_deg
-		end
-
 		def self.daylight(latitude, longitude, time_zone, date)
 			results = {date:date,time_zone:time_zone}
 			SolCal::Commands::GeometricMeanLongCommand.new(results).execute
@@ -91,7 +87,7 @@ module SolCal
 			results[:ha_sunrise] = ha_sunrise(results[:declination], latitude)
 			results[:sunrise_at] = sunrise_at(results[:solar_noon], results[:ha_sunrise])
 			results[:sunset_at] = sunset_at(results[:solar_noon], results[:ha_sunrise])
-			results[:duration] = duration_of_sunlight(results[:ha_sunrise])	
+			SolCal::Commands::DurationCommand.new(results).execute
 			results
 		end
 	end

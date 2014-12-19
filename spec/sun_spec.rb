@@ -75,10 +75,6 @@ describe "Sun" do
 		expect(SolCal::Sun.sunset_at(0.515931,SolCal::Angle.from_deg(59.02064))).to be_within(0.0001).of(0.679877)
 	end
 
-	it "should calculate the sunlight duration" do
-		expect(SolCal::Sun.duration_of_sunlight(SolCal::Angle.from_deg(59.02064))).to be_within(0.001).of(472.16513)
-	end
-
 	it "should calculate the interesting daylight information" do
 		daylight = SolCal::Sun.daylight(@latitude, @longitude, @time_zone, @date)
 		expect(daylight[:sunrise_at]).to be_within(0.001).of(0.351985)
