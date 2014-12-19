@@ -24,10 +24,6 @@ module SolCal
 			Angle.from_deg(mean_oblique_ecliptic+0.00256*Math.cos(Angle.from_deg(125.04-1934.136*julian_century).to_rad))
 		end
 
-		def self.right_ascension(app_longitude, oblique_correction)
-			Angle.from_rad(Math.atan2(BigDecimal(Math.cos(oblique_correction.to_rad),9)*BigDecimal(Math.sin(app_longitude.to_rad),9),Math.cos(app_longitude.to_rad)))
-		end
-
 		def self.daylight(latitude, longitude, time_zone, date)
 			results = {date:date,time_zone:time_zone,latitude:latitude,longitude:longitude}
 			SolCal::Commands::GeometricMeanLongCommand.new(results).execute

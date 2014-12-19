@@ -34,10 +34,6 @@ describe "Sun" do
 		expect(SolCal::Sun.oblique_correction(@julian_century, 23.43735).to_deg).to be_within(0.001).of(23.4349)
 	end
 
-	it "should calculate the right ascension" do
-		expect(SolCal::Sun.right_ascension(SolCal::Angle.from_deg(247.99), SolCal::Angle.from_deg(23.4349)).to_deg).to be_within(0.001).of(-113.777)
-	end
-
 	it "should calculate the interesting daylight information" do
 		daylight = SolCal::Sun.daylight(@latitude, @longitude, @time_zone, @date)
 		expect(daylight[:sunrise]).to be_within(0.001).of(0.351985)
