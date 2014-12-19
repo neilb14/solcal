@@ -30,10 +30,6 @@ describe "Sun" do
 		expect(SolCal::Sun.rad_vector(BigDecimal.new(0.016702,9), SolCal::Angle.from_deg(5725.893))).to be_within(0.001).of(0.986261)
 	end
 
-	it "should calculate sun's app longitude" do
-		expect(SolCal::Sun.app_longitude(SolCal::Angle.from_deg(247.9944), @julian_century).to_deg).to be_within(0.01).of(247.99)
-	end
-
 	it "should calculate the mean oblique eciptic" do
 		expect(SolCal::Sun.mean_oblique_ecliptic(@julian_century)).to be_within(0.001).of(23.43735)
 	end
