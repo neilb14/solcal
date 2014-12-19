@@ -14,10 +14,6 @@ describe "Sun" do
 		expect(SolCal::Sun.eccent_earth_orbit(@julian_century)).to be_within(0.000001).of(0.016702)
 	end
 
-	it "should calculate the sun's equation of center" do
-		expect(SolCal::Sun.equation_of_center(@julian_century, SolCal::Angle.from_deg(5725.89261441308))).to be_within(0.00001).of(-1.09204)
-	end
-
 	it "should calculate the sun's true anomoly" do
 		expect(SolCal::Sun.true_anomoly(SolCal::Angle.from_deg(5725.893), -1.092)).to be_within(0.001).of(BigDecimal.new(5724.801,9))
 	end

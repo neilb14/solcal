@@ -4,10 +4,6 @@ module SolCal
 			0.016708634-julian_century*(0.000042037+0.0000001267*julian_century)
 		end
 
-		def self.equation_of_center(julian_century, geometric_mean_anom)
-			Math.sin(geometric_mean_anom.to_rad)*(1.914602-julian_century*(0.004817+0.000014*julian_century))+Math.sin(2*geometric_mean_anom.to_rad)*(0.019993-0.000101*julian_century)+Math.sin(3*geometric_mean_anom.to_rad)*0.000289
-		end
-
 		def self.true_anomoly(geometric_mean_anom, equation_of_center)
 			geometric_mean_anom.to_deg+equation_of_center
 		end
@@ -30,7 +26,6 @@ module SolCal
 			SolCal::Commands::GeometricMeanAnomCommand.new(results).execute
 			results[:eccent_earth_orbit] = eccent_earth_orbit(results[:julian_century])
 			results[:oblique_correction] = oblique_correction(results[:julian_century], mean_oblique_ecliptic(results[:julian_century]))
-			results[:equation_of_center] = equation_of_center(results[:julian_century], results[:geometric_mean_anom])
 			SolCal::Commands::SunsetCommand.new(results).execute
 			SolCal::Commands::SunriseCommand.new(results).execute
 			SolCal::Commands::DurationCommand.new(results).execute
