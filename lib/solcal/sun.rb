@@ -64,10 +64,6 @@ module SolCal
 			(720-4*longitude.to_deg-equation_of_time+time_zone*60)/1440
 		end
 
-		def self.sunrise_at(solar_noon, ha_sunrise)
-			solar_noon-ha_sunrise.to_deg*4/1440
-		end
-
 		def self.sunset_at(solar_noon, ha_sunrise)
 			solar_noon+ha_sunrise.to_deg*4/1440
 		end
@@ -85,8 +81,8 @@ module SolCal
 			results[:app_longitude] = app_longitude(results[:true_longitude],results[:julian_century])
 			results[:declination] = declination(results[:app_longitude],results[:oblique_correction])
 			results[:ha_sunrise] = ha_sunrise(results[:declination], latitude)
-			results[:sunrise_at] = sunrise_at(results[:solar_noon], results[:ha_sunrise])
 			results[:sunset_at] = sunset_at(results[:solar_noon], results[:ha_sunrise])
+			SolCal::Commands::SunriseCommand.new(results).execute
 			SolCal::Commands::DurationCommand.new(results).execute
 			results
 		end

@@ -6,5 +6,6 @@ module SolCal
 		autoload :GeometricMeanLongCommand,		'solcal/commands/geometric_mean_long_command'
 		autoload :GeometricMeanAnomCommand,		'solcal/commands/geometric_mean_anom_command'
 		autoload :DurationCommand,				'solcal/commands/duration_command'
+		autoload :SunriseCommand,				'solcal/commands/sunrise_command'
 	end
 end
