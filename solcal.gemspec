@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Solcal::VERSION
   spec.authors       = ["Neil Bourgeois"]
   spec.email         = ["neil.bourgeois@gmail.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
+  spec.summary       = %q{Solar Calculator: find sunrise, sunset, solar Noon and solar position for any place on earth.}
+  spec.description   = %q{Solar Calculator: find sunrise, sunset, solar Noon and solar position for any place on earth.}
   spec.homepage      = ""
   spec.license       = "MIT"
 

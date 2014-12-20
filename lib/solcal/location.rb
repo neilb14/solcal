@@ -5,7 +5,8 @@ module SolCal
 		end
 
 		def method_missing(name, *args, &block)
-			Commands.run(name, create_data(args[0],args[1],args[2],args[3]))[name]
+			puts "Location calling [#{name}] with (#{args.inspect})"
+			Commands.run(name, create_data(args[0],args[1],args[2],args[3]))
 		end
 
 		def daylight(year,month,day,time_zone)
