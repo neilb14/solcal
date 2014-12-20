@@ -5,11 +5,11 @@ module SolCal
 		end
 
 		def method_missing(name, *args, &block)
-			Commands.run(name, create_data(args[0], args[1]))[name]
+			Commands.run(name, create_data(args[0],args[1],args[2],args[3]))[name]
 		end
 
-		def daylight(date,time_zone)
-			results = create_data(date, time_zone)
+		def daylight(year,month,day,time_zone)
+			results = create_data(year,month,day, time_zone)
 			Commands.run(:sunrise, results)
 			Commands.run(:sunset, results)
 			Commands.run(:duration, results)
@@ -17,12 +17,12 @@ module SolCal
 		end
 
 		protected
-		def create_data(date, time_zone)
+		def create_data(year, month, day, time_zone)
 			 {
 				latitude: @latitude,
 				longitude: @longitude,
 				time_zone: time_zone,
-				date: date
+				date: Date.new(year,month,day)
 			}
 		end
 	end
