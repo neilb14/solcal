@@ -20,5 +20,12 @@ module SolCal
 		autoload :DurationCommand,				'solcal/commands/duration_command'
 		autoload :SunriseCommand,				'solcal/commands/sunrise_command'
 		autoload :SunsetCommand,				'solcal/commands/sunset_command'
+		autoload :DaylightCommand,				'solcal/commands/daylight_command'
+
+		extend NamingConvention
+
+		def self.run(name, data)
+			Object.const_get(get_classname_from(name)).new(data).execute
+		end
 	end
 end

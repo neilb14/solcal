@@ -4,4 +4,5 @@ module SolCal
 	autoload :Sun, 			'solcal/sun'
 	autoload :Angle, 		'solcal/angle'
 	autoload :TimeOfDay,	'solcal/time_of_day'
+	autoload :Location, 	'solcal/location'
 end
