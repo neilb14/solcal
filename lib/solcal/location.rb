@@ -16,6 +16,18 @@ module SolCal
 			results
 		end
 
+		def date_pair(year, month, day, time_zone)
+			results = create_data(year,month,day, time_zone)
+			Commands.run(:duration, results)
+			date = Date.new(year, month, day)
+			while(date <= Date.new(year+1, month, day))
+				date += 1
+				next_results = create_data(date.year, date.month, date.day, time_zone)
+				Commands.run(:duration, next_results)
+				return next_results if (results[:duration]-next_results[:duration]).abs <= 0.3
+			end
+		end
+
 		protected
 		def create_data(year, month, day, time_zone)
 			 {

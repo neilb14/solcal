@@ -9,17 +9,17 @@ describe "Location" do
 
 	it "should calculate the sunrise for an arbitrary day in Edmonton" do
 		expect(SolCal::Commands).to receive(:run).and_return({sunrise:SolCal::TimeOfDay.new(0.25)})
-		expect(@edmonton.sunrise(2014,12,21,-7).to_s).to eql("06:00")
+		expect(@edmonton.sunrise(2014,12,21,-7)[:sunrise].to_s).to eql("06:00")
 	end
 
 	it "should calculate the sunset for an arbitrary day in Edmonton" do
 		expect(SolCal::Commands).to receive(:run).and_return({sunset:SolCal::TimeOfDay.new(0.75)})
-		expect(@edmonton.sunset(2014,12,21,-7).to_s).to eql("18:00")
+		expect(@edmonton.sunset(2014,12,21,-7)[:sunset].to_s).to eql("18:00")
 	end
 
 	it "should calculate the duration of sunlight for an arbitrary day in Edmonton" do
 		expect(SolCal::Commands).to receive(:run).and_return({duration:500})
-		expect(@edmonton.duration(2014,12,21,-7)).to eql(500)
+		expect(@edmonton.duration(2014,12,21,-7)[:duration]).to eql(500)
 	end
 
 	it "should calculate daylight information for edmonton" do
