@@ -16,3 +16,4 @@ mkmf.log
 bootstrap.sh
 Vagrantfile
 solcal*.gem
+._*.rb

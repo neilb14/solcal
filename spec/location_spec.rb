@@ -27,42 +27,56 @@ describe "Location" do
 		expect(results[:sunrise].to_s).to eql("08:27")
 		expect(results[:sunset].to_s).to eql("16:18")
 		expect(results[:duration]).to be_within(1).of(472.16513)
+		expect(results[:civil_dawn].to_s).to eql("07:45")
+		expect(results[:civil_dusk].to_s).to eql("17:00")
 	end
 
 	it "should calculate daylight information in Edmonton on winter solstice" do
 		results = @edmonton.daylight(2014,12,21,-7)
 		expect(results[:sunrise].to_s).to eql("08:48")
 		expect(results[:sunset].to_s).to eql("16:15")
+		expect(results[:civil_dawn].to_s).to eql("08:05")
+		expect(results[:civil_dusk].to_s).to eql("16:59")
 	end
 
 	it "should calculate daylight information in Edmonton on summer solstice" do
 		results = @edmonton.daylight(2014,6,21,-6)
 		expect(results[:sunrise].to_s).to eql("05:04")
 		expect(results[:sunset].to_s).to eql("22:07")
+		expect(results[:civil_dawn].to_s).to eql("04:11")
+		expect(results[:civil_dusk].to_s).to eql("23:00")
 	end
 
 	it "should calculate daylight information in Miami on winter solstice" do
 		results = @miami.daylight(2014,12,21,-5)
 		expect(results[:sunrise].to_s).to eql("07:03")
 		expect(results[:sunset].to_s).to eql("17:34")
+		expect(results[:civil_dawn].to_s).to eql("06:37")
+		expect(results[:civil_dusk].to_s).to eql("17:59")
 	end
 
 	it "should calculate daylight information in Miami on summer solstice" do
 		results = @miami.daylight(2014,6,21,-4)
 		expect(results[:sunrise].to_s).to eql("06:30")
 		expect(results[:sunset].to_s).to eql("20:15")
+		expect(results[:civil_dawn].to_s).to eql("06:04") 
+		expect(results[:civil_dusk].to_s).to eql("20:41") 
 	end
 
 	it "should calculate daylight information in Sydney on winter solstice" do
 		results = @sydney.daylight(2014,12,21,+11)
 		expect(results[:sunrise].to_s).to eql("05:41")
 		expect(results[:sunset].to_s).to eql("20:05")
+		expect(results[:civil_dawn].to_s).to eql("05:11") 
+		expect(results[:civil_dusk].to_s).to eql("20:34") 
 	end
 
 	it "should calculate daylight information in Sydney on summer solstice" do
 		results = @sydney.daylight(2014,6,21,+10)
 		expect(results[:sunrise].to_s).to eql("07:00")
 		expect(results[:sunset].to_s).to eql("16:53")
+		expect(results[:civil_dawn].to_s).to eql("06:32") 
+		expect(results[:civil_dusk].to_s).to eql("17:21") 
 	end
 end
 

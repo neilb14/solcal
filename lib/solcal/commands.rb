@@ -21,6 +21,9 @@ module SolCal
 		autoload :SunriseCommand,				'solcal/commands/sunrise_command'
 		autoload :SunsetCommand,				'solcal/commands/sunset_command'
 		autoload :DaylightCommand,				'solcal/commands/daylight_command'
+		autoload :HaCivilTwighlightCommand,		'solcal/commands/ha_civil_twighlight_command'
+		autoload :CivilDawnCommand,				'solcal/commands/civil_dawn_command'
+		autoload :CivilDuskCommand,				'solcal/commands/civil_dusk_command'
 
 		extend NamingConvention
 

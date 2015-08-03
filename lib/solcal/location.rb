@@ -13,6 +13,8 @@ module SolCal
 			Commands.run(:sunrise, results)
 			Commands.run(:sunset, results)
 			Commands.run(:duration, results)
+			Commands.run(:civil_dawn, results)
+			Commands.run(:civil_dusk, results)
 			results
 		end
 
