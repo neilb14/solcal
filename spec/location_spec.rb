@@ -78,5 +78,30 @@ describe "Location" do
 		expect(results[:civil_dawn].to_s).to eql("06:32") 
 		expect(results[:civil_dusk].to_s).to eql("17:21") 
 	end
+
+	it "should calculate time to 70deg from zenith on 2015-09-06 in Edmonton" do
+		results = @edmonton.time_to_angle_from_zenith(2015, 9, 6, -6, 70)
+		expect(results[:time_to_angle_from_zenith].to_s).to eql("09:13")
+	end
+
+	it "should calculate time to 70deg from zenith on 2015-09-06 in Miami" do
+		results = @miami.time_to_angle_from_zenith(2015, 9, 6, -4, 70)
+		expect(results[:time_to_angle_from_zenith].to_s).to eql("08:35")
+	end
+
+	it "should calculate time to 70deg from zenith on 2015-09-06 in Sydney" do
+		results = @sydney.time_to_angle_from_zenith(2015, 9, 6, +10, 70)
+		expect(results[:time_to_angle_from_zenith].to_s).to eql("07:51")
+	end
+
+	it "should return that the sun will never reach 47deg from zenith on 2015-09-06 in Edmonton" do
+		results = @edmonton.time_to_angle_from_zenith(2015, 9, 6, -6, 47)
+		expect(results[:time_to_angle_from_zenith].to_s).to eql("The sun will not reach 47 degrees from zenith today.")
+	end
+
+	it "should return that the sun will never reach 19.3deg from zenith on 2015-09-06 in Miami" do
+		results = @miami.time_to_angle_from_zenith(2015, 9, 6, -6, 19.3)
+		expect(results[:time_to_angle_from_zenith].to_s).to eql("The sun will not reach 19.3 degrees from zenith today.")
+	end
 end
 

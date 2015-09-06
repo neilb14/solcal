@@ -18,6 +18,13 @@ module SolCal
 			results
 		end
 
+		def time_to_angle_from_zenith(year, month, day, time_zone, angle_from_zenith)
+			results = create_data(year, month, day, time_zone)
+			results[:angle_from_zenith] = angle_from_zenith
+			Commands.run(:time_to_angle_from_zenith, results)
+			results
+		end
+
 		def date_pair(year, month, day, time_zone)
 			results = create_data(year,month,day, time_zone)
 			Commands.run(:duration, results)
