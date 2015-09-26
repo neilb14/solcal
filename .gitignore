@@ -17,3 +17,4 @@ bootstrap.sh
 Vagrantfile
 solcal*.gem
 ._*.rb
+npm-debug.log

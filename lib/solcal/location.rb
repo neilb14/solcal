@@ -22,6 +22,7 @@ module SolCal
 			results = create_data(year, month, day, time_zone)
 			results[:angle_from_zenith] = angle_from_zenith
 			Commands.run(:time_to_angle_from_zenith, results)
+			Commands.run(:opposite_time_to_angle_from_zenith, results)
 			results
 		end
 

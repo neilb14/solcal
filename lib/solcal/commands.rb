@@ -24,7 +24,9 @@ module SolCal
 		autoload :HaCivilTwighlightCommand,		'solcal/commands/ha_civil_twighlight_command'
 		autoload :CivilDawnCommand,				'solcal/commands/civil_dawn_command'
 		autoload :CivilDuskCommand,				'solcal/commands/civil_dusk_command'
+		autoload :HaAngleToZenithCommand,		'solcal/commands/ha_angle_to_zenith_command'
 		autoload :TimeToAngleFromZenithCommand,	'solcal/commands/time_to_angle_from_zenith_command'
+		autoload :OppositeTimeToAngleFromZenithCommand,	'solcal/commands/opposite_time_to_angle_from_zenith_command'
 
 		extend NamingConvention
 
