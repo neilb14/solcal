@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    solcal (0.0.4)
+    solcal (0.0.5)
 
 GEM
   remote: https://rubygems.org/
@@ -29,3 +29,6 @@ DEPENDENCIES
   rake (~> 10.0)
   rspec
   solcal!
+
+BUNDLED WITH
+   1.10.5

@@ -27,6 +27,7 @@ module SolCal
 		autoload :HaAngleToZenithCommand,		'solcal/commands/ha_angle_to_zenith_command'
 		autoload :TimeToAngleFromZenithCommand,	'solcal/commands/time_to_angle_from_zenith_command'
 		autoload :OppositeTimeToAngleFromZenithCommand,	'solcal/commands/opposite_time_to_angle_from_zenith_command'
+		autoload :AngleToZenithAtTimeCommand, 'solcal/commands/angle_to_zenith_at_time_command'
 
 		extend NamingConvention
 

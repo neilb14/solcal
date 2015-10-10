@@ -15,13 +15,6 @@ describe "TimeToAngleFromZenithCommand" do
 		expect(@result[:time_to_angle_from_zenith].to_s).to eql("07:10")
 	end
 
-	it "should calculate the time the sun will reach a 72deg angle from the zenith on 2015-08-05" do
-		@result = {julian_century:0.15592060, latitude:SolCal::Angle.from_deg(53.5333),longitude:SolCal::Angle.from_deg(-113.5), time_zone: -7}
-		@result[:angle_from_zenith] = 72
-		SolCal::Commands::TimeToAngleFromZenithCommand.new(@result).execute
-		expect(@result[:time_to_angle_from_zenith].to_s).to eql("07:10")
-	end
-
 	it "should calculate the time the sun will reach max angle on 2015-12-21" do
 		@result = {julian_century:0.15969883641341548, latitude:SolCal::Angle.from_deg(53.5333),longitude:SolCal::Angle.from_deg(-113.5), time_zone: -7}
 		@result[:angle_from_zenith] = 76.97
