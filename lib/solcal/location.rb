@@ -26,6 +26,13 @@ module SolCal
 			results
 		end
 
+		def angle_to_zenith_at_time(year, month, day, hour, minute, time_zone)
+			results = create_data(year, month, day, time_zone)
+			results[:at_time] = (hour*60.0+minute)/(24*60.0)
+			Commands.run(:angle_to_zenith_at_time, results)
+			results
+		end
+
 		def date_pair(year, month, day, time_zone)
 			results = create_data(year,month,day, time_zone)
 			Commands.run(:duration, results)

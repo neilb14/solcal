@@ -84,16 +84,31 @@ describe "Location" do
 		expect(results[:time_to_angle_from_zenith].to_s).to eql("09:13")
 	end
 
+	it "should calculate angle to zenith of 70deg at 9:13 on 2015-09-06 in Edmonton" do
+		results = @edmonton.angle_to_zenith_at_time(2015, 9, 6, 9, 13, -6)
+		expect(results[:angle_to_zenith_at_time].to_deg).to be_within(0.1).of(70)
+	end
+
 	it "should calculate time to 70deg from zenith on 2015-09-06 in Miami" do
 		results = @miami.time_to_angle_from_zenith(2015, 9, 6, -4, 70)
 		expect(results[:time_to_angle_from_zenith].to_s).to eql("08:35")
 		expect(results[:opposite_time_to_angle_from_zenith].to_s).to eql("18:02")
 	end
 
+	it "should calculate angle from zenith of 70deg at 8:35 on 2015-09-06 in Miami" do
+		results = @miami.angle_to_zenith_at_time(2015, 9, 6, 8, 35, -4)
+		expect(results[:angle_to_zenith_at_time].to_deg).to be_within(0.2).of(70)
+	end
+
 	it "should calculate time to 70deg from zenith on 2015-09-06 in Sydney" do
 		results = @sydney.time_to_angle_from_zenith(2015, 9, 6, +10, 70)
 		expect(results[:time_to_angle_from_zenith].to_s).to eql("07:51")
 		expect(results[:opposite_time_to_angle_from_zenith].to_s).to eql("15:56")
+	end
+
+	it "should calculate angle from zenith of 70deg at 7:51 on 2015-09-06 in Sydney" do
+		results = @sydney.angle_to_zenith_at_time(2015, 9, 6, 7, 51, +10)
+		expect(results[:angle_to_zenith_at_time].to_deg).to be_within(0.1).of(70)
 	end
 
 	it "should return that the sun will never reach 47deg from zenith on 2015-09-06 in Edmonton" do
