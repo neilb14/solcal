@@ -22,4 +22,21 @@ describe "AngleToZenithAtTimeCommand" do
 		expect(result[:angle_to_zenith_at_time].to_deg).to be_within(0.1).of(77.0)
 	end
 
+	it "should see the angle to the zenith increase every 15 minute interval" do
+		result = {date:Date.new(2015,8,2), latitude:SolCal::Angle.from_deg(53.5333), longitude:SolCal::Angle.from_deg(-113.5) , time_zone: -6}
+		result[:at_time] = (6*60+9)/(24*60.0)
+		SolCal::Commands::AngleToZenithAtTimeCommand.new(result).execute
+		expect(result[:angle_to_zenith_at_time].to_deg).to be_within(1).of(89)
+
+		result = {date:Date.new(2015,8,2), latitude:SolCal::Angle.from_deg(53.5333), longitude:SolCal::Angle.from_deg(-113.5) , time_zone: -6}
+		result[:at_time] = (6*60+24)/(24*60.0)
+		SolCal::Commands::AngleToZenithAtTimeCommand.new(result).execute
+		expect(result[:angle_to_zenith_at_time].to_deg).to be_within(1).of(87)
+
+		result = {date:Date.new(2015,8,2), latitude:SolCal::Angle.from_deg(53.5333), longitude:SolCal::Angle.from_deg(-113.5) , time_zone: -6}
+		result[:at_time] = (6*60+39)/(24*60.0)
+		SolCal::Commands::AngleToZenithAtTimeCommand.new(result).execute
+		expect(result[:angle_to_zenith_at_time].to_deg).to be_within(1).of(85)
+	end
+
 end
